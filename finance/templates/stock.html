@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stock info
+{% endblock %}
+
+{% block main %}
+<div class="section">
+        <body>
+            {% for st in stock %}
+
+                <h1>Name: </h1><h2>{{ st.name }}</h2>
+                <h1>Price: </h1><h2>{{ st.price }}</h2>
+                <h1>Symbol: </h1><h2>{{ st.symbol }}</h2>
+             {% endfor %}
+        <body>
+</div>
+{% endblock %}
