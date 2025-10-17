@@ -48,9 +48,9 @@ def index():
         symbol = item["stock_symbol"]
         
         # Get current shares
-        shares_rows = db.execute("SELECT SUM(shares) FROM portfolio WHERE stock_symbol = ? AND stock_buyer = ?", symbol, name)
-        shares = shares_rows[0]["SUM(shares)"]
-        
+        shares_rows = db.execute("SELECT SUM(shares) AS total_shares FROM portfolio WHERE stock_symbol = ? AND stock_buyer = ?", symbol, name)
+        shares = shares_rows[0]["total_shares"]
+                
         # If shares are zero (or less), skip this stock
         if shares is None or shares <= 0:
             continue
@@ -305,8 +305,8 @@ def sell():
         shares_to_sell = int(shares_input)
         
         # Check current holdings
-        shares_held_rows = db.execute("SELECT SUM(shares) FROM portfolio WHERE stock_buyer = ? AND stock_symbol = ?", name, stock_sym)
-        shares_held = shares_held_rows[0]["SUM(shares)"]
+        shares_held_rows = db.execute("SELECT SUM(shares) AS shares_held FROM portfolio WHERE stock_buyer = ? AND stock_symbol = ?", name, stock_sym)
+        shares_held = shares_held_rows[0]["shares_held"]
         
         if shares_held is None or shares_to_sell > shares_held:
             return apology("Not enough shares", 400)
