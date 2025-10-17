@@ -90,52 +90,42 @@ tbody tr:nth-of-type(odd) {
 }
 
 </style>
-<div class="container">
-
-</div>
-
 <div class="section">
-<body>
-    <table>
-        <thead>
-            <tr>
-                <th>Symbol</th>
-                <th>Shares</th>
-                <th>Price</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- TODO: Loop through the database entries to display them in this table -->
-                {% for stock in stocks %}
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th> <th>Shares</th>
+                    <th>Current Price</th>
+                    <th>Total Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in stocks_summary %}
                     <tr>
-                        <td>{{ stock }}</td>
-                        <td>{{ shares[loop.index0]}}</td>
-                        <td>{{ prices[loop.index0]}}</td>
-                        <td>{{ total[loop.index0]}}</td>
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.name }}</td>
+                        <td>{{ stock.shares }}</td>
+                        <td>{{ stock.price }}</td> 
+                        <td>{{ stock.total }}</td> 
                     </tr>
-
                 {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </body>
 </div>
+
+<div class="container" style="text-align: right; margin-top: 20px;">
+    <h5>
+        <span style="float:right;"><strong>{{ cash }}</strong></span>
+        <span style="float:right; margin-right: 15px;">Cash</span>
+    </h5>
+    <br>
+    <h5>
+        <span style="float:right;"><strong>{{ all_total }}</strong></span>
+        <span style="float:right; margin-right: 15px;">TOTAL VALUE</span>
+    </h5>
 </div>
-</body>
-<h5>
-    <span style="float:left;"></span>
-    <span style="float:center;text-align:right;margin-left: 180px;"></span>
-    <span style="float:right;text-align:right;margin-left: 260px;">{{cash}}</span>
-    <span style="float:right;text-align:right;">Cash</span>
-</h5>
-<h5>
-    <span style="float:left;"></span>
-    <span style="float:center;text-align:right;margin-left: 180px;"></span>
-    <span style="float:right;text-align:right;margin-left: 255px;">{{all_total}}</span>
-    <span style="float:right;text-align:right;">TOTAL</span>
-</h5>
-
-
-
 
 {% endblock %}
-
